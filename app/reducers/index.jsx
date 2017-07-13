@@ -1,11 +1,23 @@
-import { combineReducers } from 'redux'
+import { combineReducers, createStore, applyMiddleware } from 'redux'
+import thunkMiddleware from 'redux-thunk';
+import createLogger from 'redux-logger';
+import students from "./Student";
+import campuses from "./Campus";
+import {composeWithDevTools} from "redux-devtools-extension"
 
-const initialState = {}
+const reducer = combineReducers({ //this whole thing is the state
+  students, campuses
+})
 
-const rootReducer = function(state = initialState, action) {
-  switch(action.type) {
-    default: return state
-  }
-};
+const store = createStore(
+  reducer,
+  composeWithDevTools(applyMiddleware(
+    thunkMiddleware, 
+    createLogger()
+  ))
+);
 
-export default rootReducer
+export default store;
+
+export * from "./Campus";
+export * from "./Student";

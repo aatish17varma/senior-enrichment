@@ -3,6 +3,8 @@ const debug = require('debug')('sql');
 const chalk = require('chalk');
 const Sequelize = require('sequelize');
 const pkg = require('../package.json');
+const express = require("express");
+const app = express();
 
 const name = process.env.DATABASE_NAME || pkg.name;
 const connectionString = process.env.DATABASE_connectionString || `postgres://localhost:5432/${pkg.name}`;
@@ -15,8 +17,13 @@ const db = module.exports = new Sequelize(connectionString, {
   native: true    // lets Sequelize know we can use pg-native for ~30% more speed (if you have issues with pg-native feel free to take this out and work it back in later when we have time to help)
 });
 
+
+
+
 // run our models file (makes all associations for our Sequelize objects)
 require('./models')
+
+// app.use('/api', require('./api'));
 
 // sync the db, creating it if necessary
 function sync(force=false, retries=0, maxRetries=5) {
@@ -41,4 +48,11 @@ function sync(force=false, retries=0, maxRetries=5) {
   })
 }
 
-db.didSync = sync();
+
+app.use(function(err, req, res, next){ //error catching middleware
+  console.error(err, typeof next);
+  console.error(err.stack)
+  res.status(err.status || 500).send(err.message || "Internal server error.");
+})
+
+// db.didSync = sync();

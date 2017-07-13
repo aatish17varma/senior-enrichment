@@ -1,0 +1,4 @@
+const SET_CAMPUS = "SET_STORE"
+
+const SET_STUDENT = "SET_STUDENT"
+
