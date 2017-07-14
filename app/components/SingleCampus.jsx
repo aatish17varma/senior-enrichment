@@ -3,9 +3,10 @@ import React from "react";
 import {connect} from "react-redux";
 import {getStudents} from "../reducers/student";
 import { Link } from "react-router-dom";
+import {eraseStudent} from "../reducers/Student";
 
 
-export function singleCampuses(props){
+export function singleCampus(props){
 
     const {allStudents} = props;    
     var filteredStudents = allStudents.filter(element => { return element.campusId === Number(props.match.params.id)})
@@ -33,7 +34,7 @@ export function singleCampuses(props){
                                 </div>
 
                                 <div className = "col">
-                             <button type="button" className="btn btn-danger">Delete</button>
+                             <button type="button" onClick = {() => props.deleteStudent(eachStudent)} className="btn btn-danger">Delete</button>
                                 </div>
                             
                             </div>
@@ -47,22 +48,31 @@ export function singleCampuses(props){
             }
             </div>
         <div className="col-md-4">
-            <Link to = {'/add-student'}>
+            <Link to = {`/campuses/${props.match.params.id}/add-student`}>
             <button type="button" className="btn btn-primary btn-lg">Add Student</button> 
             </Link>
-        </div>
+            
+        </div>  
     </div>
     )
 }
 
-
-export function mapStateToProps(state){
+function mapStateToProps(state){
     return {
         allStudents: state.students
     }
 }
 
-export default connect(mapStateToProps)(singleCampuses);
+function mapDispatchToProps(dispatch){
+    return{
+          deleteStudent(singleStudent){
+            var toDispatch = eraseStudent(singleStudent);
+            dispatch(toDispatch);
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(singleCampus);
 
 
 

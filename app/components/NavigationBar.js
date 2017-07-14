@@ -7,11 +7,11 @@ export default class NavigationBar extends Component{
     <nav className="navbar navbar-inverse">
         <div className="container-fluid">
             <div className="navbar-header">
-            <a className="navbar-brand">Campus Portal</a>
+            <a className="navbar-brand" href = "/" >Campus Portal</a>
             </div>
             <ul className="nav navbar-nav">
-            <li className="active"><a href="/">Home</a></li>
-            <li><a href="#">Students</a></li>
+            <li className="active"><a href="/">Campuses</a></li>
+            <li className = "active"><a href="/students">Students</a> </li>
             </ul>
          </div>
         </nav>

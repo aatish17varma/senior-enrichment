@@ -7,6 +7,8 @@ import {getStudents} from "../reducers/Student"
 import store from "../reducers/index";
 import SingleCampus from "./SingleCampus";
 import AddStudent from "./AddStudent";
+import AllStudents from "./AllStudents";
+import AddCampus from "./AddCampus";
 
 import {Route, Switch } from 'react-router-dom';
 
@@ -23,11 +25,11 @@ export default class LoadComponents extends Component{
         return(
             <div>
                 <NavigationBar />
-                <Switch>
                 <Route exact path = "/" component = {AllCampuses} />
-                <Route path = "/campuses/:id" component = {SingleCampus} /> 
-                <Route path = "/add-student" component = {AddStudent} />
-                </Switch>
+                <Route exact path = "/campuses/:id" component = {SingleCampus} /> 
+                <Route exact path = "/campuses/:id/add-student" component = {AddStudent} />
+                <Route path = "/students" component = {AllStudents} />
+                 <Route exact path = "/make-campus" component = {AddCampus} />
             </div>
         )
     

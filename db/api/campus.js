@@ -23,11 +23,14 @@ router.get('/:id/students', (req, res, next)=>{
 })
 
 router.post("/", (req, res, next) =>{
-    console.log(req.body);
-    Campus.create(req.body)
+    Campus.findOrCreate({where: {
+        name: req.body.name,
+        image: req.body.image
+    }})
     .then((campus) => {
+        console.log("reached the .then part")
         if(campus.name !== null){
-            res.send({ campus });
+            res.json( campus );
         }
         else{
             res.sendStatus(404);
@@ -38,7 +41,7 @@ router.post("/", (req, res, next) =>{
 
 router.put("/:id", (req, res, next) => {
     console.log("reached put route");
-    Campus.findOne({where: {id: req.params.id}})
+    Campus.findById( req.params.id )
     .then((campus) => {
         var updatedCampus = campus.update(req.body);
         return updatedCampus;

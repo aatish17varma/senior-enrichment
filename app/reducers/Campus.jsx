@@ -2,7 +2,7 @@ import axios from "axios";
 
 const GET_ALL_CAMPUSES = "GET_ALL_CAMPUSES"
 
-const ADD_CAMPUS = "ADD_NEW_CAMPUS"
+const ADD_CAMPUS = "ADD_CAMPUS"
 
 const GET_STUDENTS_FOR_CAMPUS = "GET_STUDENTS_FOR_CAMPUS"
 
@@ -28,17 +28,17 @@ export function getStudentsForCampus(studentList){
 }
 
 
-export default function reduce(state = [], action){
+export default function reduce(campuses = [], action){
     switch(action.type){
         case GET_ALL_CAMPUSES:
              return action.campuses   //dont need to indicate
              break;
          case ADD_CAMPUS:
-             return Object.assign({}, state, [...campuses, action.campus]);    //dont need to indicate
+             return [action.campus, ...campuses];   //dont need to indicate
              break;
         default:
             console.log("Hit the default statement")
-            return state;
+            return campuses;
         
     }
 
@@ -55,14 +55,14 @@ export function getCampuses(){
     }
 }
 
-// export function getStudents(campusID){
-//     return function(thunk){
-//         return axios.get("/campus/${campusID}")
-//         .then(res => res.data)
-//         .then(listOfStudents => {
-//             var studentList = getStudentsForCampus(listOfStudents);
-//             return dispatch(studentList);
-//         })
-//     }
-// }
-
+export function createCampus(campusInfo){
+    console.log("reached the createCampus thunk")
+    return function(dispatch){
+        return axios.post("/api/campus", campusInfo)
+        .then(res => res.data)
+        .then(campus => {
+            var campusInAction = addCampus(campus);
+            return dispatch(campusInAction);
+        })
+    }
+}

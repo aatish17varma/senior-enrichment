@@ -11,17 +11,27 @@ function allCampuses(props){
     return( 
 
         <div>  
-          <h3>Campuses</h3>
+
+            <div className = "row">
+                <div className = "col-xs-6">
+                    <h3>Campuses</h3>
+                </div>
+                <div className = "col-xs-2 col-xs-offset-4">
+                    <Link to = "/make-campus">
+                    <button type="button" className="btn btn-primary"> Add a Campus </button>
+                    </Link>
+                </div>
+            </div>
+
+
           <div className = "row">
-                {/* CSS */}
-              {/* style = {{backgroundColor: "#1c1e22", boxShadow: "none"}} */}
 
            {
             campuses.map(eachCampus => {
             return (
             <div className="col-xs-4" key={ eachCampus.id }>
                  <Link className="thumbnail" to={`/campuses/${eachCampus.id}`}>   
-                <img src={ eachCampus.image } className = "img-thumbnail" style = {{height: '500px', width: '700px'}}/>
+                <img src={ eachCampus.image } className = "img-thumbnail" style = {{height: '250px', width: '700px'}}/>
                 <div className="caption">
                   <h5>
                     <span>{ eachCampus.name }</span>
@@ -32,6 +42,7 @@ function allCampuses(props){
            }) 
            
            }
+
          </div>  
             
             

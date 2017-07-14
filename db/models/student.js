@@ -11,6 +11,7 @@ module.exports = db.define("student", {
     },
     image: {
         type: dataTypes.STRING(),
-        allowNull: false
+        allowNull: true,
+        defaultValue: "https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/99.png"
     }
 })

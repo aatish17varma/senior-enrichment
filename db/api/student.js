@@ -21,10 +21,16 @@ router.get('/:id', (req, res, next) => {
 
 
 router.post("/", (req, res, next) =>{
-    Student.create(req.body)
+    Student.findOrCreate({where: {
+        name: req.body.name,
+        email: req.body.email,
+        campusId: req.body.campusId,
+        image: req.body.image
+    }})
     .then((student) => {
+        console.log("reached the .then part")
         if(student.name !== null){
-            res.send({ student });
+            res.json( student );
         }
         else{
             res.sendStatus(404);
@@ -32,6 +38,8 @@ router.post("/", (req, res, next) =>{
     })
     .catch(next);
 })
+
+
 router.put("/:id", (req, res, next) => {
     Student.findOne({where: {id: req.params.id}})
     .then((student) => {
@@ -47,14 +55,11 @@ router.put("/:id", (req, res, next) => {
 })
 
 router.delete("/:id", (req, res, next) => {
-  Student.findOne( {where: {id: req.params.id} })
-  .then((foundStudent) => {
-      foundStudent === null || foundStudent === "" ? res.sendStatus(404) : Student.destroy(foundStudent);
-  })
-  .then(() => {
-        res.send("Campus Succesfully deleted")
-  })    
-.catch(next);
+    Student.destroy({where: {
+        id: req.params.id
+    }
+    }).then( () => res.status(204).end())
+    .catch(next);
 })
 
 module.exports = router;
