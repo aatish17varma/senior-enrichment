@@ -2,9 +2,9 @@
 import React,{Component} from "react";
 import {connect} from "react-redux";
 import { Link } from "react-router-dom";
-import {createCampus} from "../reducers/Campus";
+import {changeCampus} from "../reducers/Campus";
 
-export class AddCampus extends Component{
+export class UpdateCampus extends Component{
     
 constructor(props){
     super();
@@ -15,7 +15,25 @@ constructor(props){
     this.nameHandleChange = this.nameHandleChange.bind(this);
     this.imageHandleChange = this.imageHandleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.findRightCampus = this.findRightCampus.bind(this);
 
+}
+
+componentDidMount() {
+    const user = this.findRightCampus();
+    this.setState({
+        nameInputValue: user && user.name,
+        imageInputValue: user && user.image
+    })
+}
+
+findRightCampus(){
+
+   var foundCampus = this.props.allCampuses.filter((campus) => {
+        return +this.props.match.params.id === +campus.id;
+   })
+   console.log(foundCampus);
+    return foundCampus[0];
 }
 
 nameHandleChange(event){
@@ -27,11 +45,12 @@ imageHandleChange(event){
 }
 
 handleSubmit(event){
+    console.log(this.props);
     event.preventDefault();
     console.log("IM IN HANDLE SUBMIT +++++++++++++++++");
     console.log(this.state.nameInputValue)
     console.log(this.state.imageInputValue);
-    this.props.makeCampus(this.state.nameInputValue, this.state.imageInputValue);
+    this.props.updateCampus(this.state.nameInputValue, this.state.imageInputValue, this.props.match.params.id);
 
 }
 render(){
@@ -40,7 +59,7 @@ render(){
         <div>
               <form className="form-horizontal" onSubmit = {this.handleSubmit}>
              <fieldset>
-                <legend>New Campus</legend>
+                <legend>Update Campus</legend>
                 <label > Campus Name: </label>
                  <input className="form-control" value = {this.state.nameInputValue} type = "text" onChange = {this.nameHandleChange} />
                 
@@ -57,16 +76,22 @@ render(){
     )
 }
 }
-const mapDispatchToProps = function(dispatch, props){
+
+const mapStateToProps = function(state){
     return {
-        makeCampus: (name, image) => {
-            console.log(props.history);
-            var madeCampus = createCampus({name: name, image: image}, props.history);
-            dispatch(madeCampus);
+        allCampuses: state.campuses
+    }
+}
+
+const mapDispatchToProps = function(dispatch){
+    return {
+        updateCampus: (name, image, id) => {
+            console.log("reached the updateCampus thunk in my component");
+            var thunk = changeCampus({name: name, image: image, id: id});
+            dispatch(thunk);
         }
-        
     }
 
 }
 
-export default connect(null, mapDispatchToProps)(AddCampus);
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateCampus);

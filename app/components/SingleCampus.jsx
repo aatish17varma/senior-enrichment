@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {getStudents} from "../reducers/student";
 import { Link } from "react-router-dom";
 import {eraseStudent} from "../reducers/Student";
+import {eraseCampus} from "../reducers/Campus";
 
 
 export function singleCampus(props){
@@ -51,6 +52,12 @@ export function singleCampus(props){
             <Link to = {`/campuses/${props.match.params.id}/add-student`}>
             <button type="button" className="btn btn-primary btn-lg">Add Student</button> 
             </Link>
+
+            <button type="button" onClick = {() => {props.deleteCampus(props.match.params.id)}}className="btn btn-primary btn-lg">Delete This Campus</button> 
+
+            <Link to = {`/campuses/${props.match.params.id}/update`}>
+            <button type="button" className="btn btn-primary btn-lg">Update Campus</button> 
+            </Link>
             
         </div>  
     </div>
@@ -63,12 +70,16 @@ function mapStateToProps(state){
     }
 }
 
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch, ownProps){
     return{
           deleteStudent(singleStudent){
             var toDispatch = eraseStudent(singleStudent);
             dispatch(toDispatch);
-        }
+          },
+          deleteCampus(singleCampusId){
+            var toDispatch = eraseCampus(singleCampusId, ownProps.history);
+            dispatch(toDispatch);
+          }
     }
 }
 

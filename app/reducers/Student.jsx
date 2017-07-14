@@ -8,6 +8,8 @@ const EMPTY_STUDENT_LIST = "EMPTY_STUDENT_LIST"
 
 const DELETE_A_STUDENT = "DELETE_A_STUDENT"
 
+const UPDATE_STUDENT = "UPDATE_STUDENT"
+
 export function getAllStudents(students){
     return {
         type: GET_ALL_STUDENTS,
@@ -28,6 +30,13 @@ export function deleteAStudent(student){
     }
 }
 
+export function updateStudent(student){
+    return {
+        type: UPDATE_STUDENT, 
+        student
+    }
+}
+
 
 export default function reduce(students = [], action){
     switch(action.type){
@@ -41,6 +50,15 @@ export default function reduce(students = [], action){
             console.log('reached DELETE case in reducer', action)
             return students.filter((eachStudent) => {if(eachStudent.id !== action.student.id){return true;}})
             break;
+        case UPDATE_STUDENT:
+            return students.map((eachStudent) => {
+                if(eachStudent.id === action.student.id){        
+                    return action.student;
+                }
+                else{
+                    return eachStudent;
+                }
+            })
         default:
             console.log("Hit the default statement")
             return students;
@@ -81,6 +99,18 @@ export function eraseStudent(student){
             return dispatch(notDeleted);
         })
     }
+}
+
+export function changeStudent(student){
+ console.log('reached the updateStudent thunk')
+        return function(dispatch){
+            return axios.put(`/api/student/${student.id}`, student)
+            .then(res => res.data)
+            .then((updatedStudent) => {
+                var action = updateStudent(updatedStudent);
+                dispatch(action);
+            })
+        } 
 }
 
 

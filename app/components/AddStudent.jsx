@@ -16,6 +16,7 @@ constructor(props){
     }
     this.nameHandleChange = this.nameHandleChange.bind(this);
         this.emailHandleChange = this.emailHandleChange.bind(this);
+             this.imageHandleChange = this.imageHandleChange.bind(this);
                 this.handleSubmit = this.handleSubmit.bind(this);
 
 }
@@ -36,7 +37,7 @@ handleSubmit(event){
     console.log(this.state.emailInputValue);
     console.log(this.state.imageInputValue);
     event.preventDefault();
-    this.props.createStudent(this.state.nameInputValue, this.state.emailInputValue, this.props.match.params.id);
+    this.props.createStudent(this.state.nameInputValue, this.state.emailInputValue, this.props.match.params.id, this.state.imageInputValue);
 
 }
 

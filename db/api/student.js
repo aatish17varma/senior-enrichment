@@ -41,7 +41,8 @@ router.post("/", (req, res, next) =>{
 
 
 router.put("/:id", (req, res, next) => {
-    Student.findOne({where: {id: req.params.id}})
+   console.log("reached put route");
+    Student.findById( req.params.id )
     .then((student) => {
         var updatedStudent = student.update(req.body);
         return updatedStudent;

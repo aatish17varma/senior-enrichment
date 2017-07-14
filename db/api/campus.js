@@ -55,12 +55,9 @@ router.put("/:id", (req, res, next) => {
 })
 
 router.delete("/:id", (req, res, next) => {
-  Campus.findOne( {where: {id: req.params.id} })
-  .then((foundCampus) => {
-      foundCampus === null || foundCampus === "" ? res.sendStatus(404) : Campus.destroy(foundCampus);
-  })
+  Campus.destroy( {where: {id: req.params.id} })
   .then(() => {
-        res.send("Campus Succesfully deleted")
+        res.status(204).end()
   })    
 .catch(next);
 })

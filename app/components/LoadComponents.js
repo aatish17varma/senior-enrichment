@@ -9,6 +9,8 @@ import SingleCampus from "./SingleCampus";
 import AddStudent from "./AddStudent";
 import AllStudents from "./AllStudents";
 import AddCampus from "./AddCampus";
+import UpdateCampus from "./UpdateCampus"
+import UpdateStudent from "./UpdateStudent"
 
 import {Route, Switch } from 'react-router-dom';
 
@@ -28,8 +30,10 @@ export default class LoadComponents extends Component{
                 <Route exact path = "/" component = {AllCampuses} />
                 <Route exact path = "/campuses/:id" component = {SingleCampus} /> 
                 <Route exact path = "/campuses/:id/add-student" component = {AddStudent} />
-                <Route path = "/students" component = {AllStudents} />
-                 <Route exact path = "/make-campus" component = {AddCampus} />
+                <Route exact path = "/students" component = {AllStudents} />
+                <Route exact path = "/make-campus" component = {AddCampus} />
+                <Route exact path = "/campuses/:id/update" component = {UpdateCampus} />
+                <Route exact path = "/students/:id/update-student" component = {UpdateStudent} />
             </div>
         )
     
