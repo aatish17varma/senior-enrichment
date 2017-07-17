@@ -83,11 +83,11 @@ const mapStateToProps = function(state){
     }
 }
 
-const mapDispatchToProps = function(dispatch){
+const mapDispatchToProps = function(dispatch, ownProps){
     return {
         updateCampus: (name, image, id) => {
             console.log("reached the updateCampus thunk in my component");
-            var thunk = changeCampus({name: name, image: image, id: id});
+            var thunk = changeCampus({name: name, image: image, id: id}, ownProps.history);
             dispatch(thunk);
         }
     }

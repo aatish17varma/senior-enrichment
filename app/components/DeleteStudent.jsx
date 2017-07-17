@@ -1,3 +1,6 @@
+
+import {eraseStudent} from "../Student";
+
 function DeleteStudent(props){
     console.log("reached the Delete Student Component");
     return(
@@ -34,3 +37,13 @@ function DeleteStudent(props){
         </div>
     )
 } 
+
+const mapDispatchToProps = function(dispatch){
+    return {
+        deleteStudent(student){
+            var deletedStudent = eraseStudent(student);
+            dispatch(deletedStudent);
+        }
+        
+    }
+}

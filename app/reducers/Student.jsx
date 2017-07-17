@@ -84,7 +84,6 @@ export function makeStudent(studentInformation, history){
         .then(madeStudent => {
             var student = addStudent(madeStudent);
             return dispatch(student);
-            history.push('/');
         })
     }
 }
@@ -108,7 +107,7 @@ export function changeStudent(student){
             .then(res => res.data)
             .then((updatedStudent) => {
                 var action = updateStudent(updatedStudent);
-                dispatch(action);
+                return dispatch(action);
             })
         } 
 }

@@ -5,14 +5,11 @@ import {getCampuses} from "../reducers/Campus"
 import {Link} from "react-router-dom";
 
 function AllStudents(props){
-    console.log(props);
+
+    console.log(props.listOfCampuses);
+    console.log(props.listOfStudents);
     
-    // function getSchool(student){
-    //     console.log(props.listOfCampuses);
-    //     console.log(student);
-    //     console.log(props.listOfCampuses.filter(campus => campus.id === student.campusId)[0]);
-    
-    // }
+
     return(
         <div>
         
@@ -20,7 +17,7 @@ function AllStudents(props){
             <h3>All Students:
                  
                  </h3>
-            {props.listOfStudents.map(function(element){
+            {props.listOfStudents.map(element => {
                 return(
                 <div className = "container" key = {element.id}>  
 
@@ -37,7 +34,16 @@ function AllStudents(props){
                             <h4 className="media-heading">{element.name}</h4>
                                 <p>{element.email}</p>
         
-                                <p>Campuse ID: {element.campusId}</p>
+                                <p>Campus Name:{ console.log(props.listOfCampuses.filter((campus) => {
+                                       return +campus.id === +element.campusId;
+                                   }))}{   
+                                    
+                                    props.listOfCampuses.filter((campus) => {
+                                       return +campus.id === +element.campusId;
+                                   })[0]["name"] 
+                                    
+                                    }</p>
+            
                                 </div>
 
                                 <div className = "col">

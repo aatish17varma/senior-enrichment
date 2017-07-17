@@ -94,34 +94,34 @@ export function createCampus(campusInfo, history){
         .then(res => res.data)
         .then(campus => {
             var campusInAction = addCampus(campus[0]);
-            dispatch(campusInAction);
             history.push('/');
+            return dispatch(campusInAction);
            
         })
     }
 }
 
-export function eraseCampus(campusId, history){
+export function eraseCampus(campusId){
     console.log('reached the eraseCampus thunk')
     return function(dispatch){
         return axios.delete(`/api/campus/${campusId}`)
         .then(res => res.data)
         .then(() => {
             var campusToDelete = deleteCampus(campusId);
-            dispatch(campusToDelete);
-            history.push('/');
+            return dispatch(campusToDelete);
         })
     }
 }
 
-export function changeCampus(campus){
+export function changeCampus(campus, history){
         console.log('reached the updateCampus thunk')
         return function(dispatch){
             return axios.put(`/api/campus/${campus.id}`, campus)
             .then(res => res.data)
             .then((updatedCampus) => {
                 var action = updateCampus(updatedCampus);
-                dispatch(action);
+                history.push(`/campuses/${campus.id}`);
+                return dispatch(action);
             })
         }
 }

@@ -12,11 +12,15 @@ constructor(props){
     this.state = {
         nameInputValue: "",
         emailInputValue: "",
-        imageInputValue: ""
+        imageInputValue: "",
+        campusIdInputValue: 0
     }
     this.nameHandleChange = this.nameHandleChange.bind(this);
     this.emailHandleChange = this.emailHandleChange.bind(this);
     this.imageHandleChange = this.imageHandleChange.bind(this);
+    this.campusIdHandleChange = this.campusIdHandleChange.bind(this);
+
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.findRightStudent = this.findRightStudent.bind(this);
 }
@@ -26,7 +30,8 @@ componentDidMount() {
     this.setState({
         nameInputValue: user && user.name,
         emailInputValue: user && user.email,
-        imageInputValue: user && user.image
+        imageInputValue: user && user.image,
+        campusIdInputValue: user && user.campusId
     })
 }
 
@@ -50,6 +55,11 @@ emailHandleChange(event){
 imageHandleChange(event){
     this.setState({imageInputValue: event.target.value});
 }
+campusIdHandleChange(event){
+    this.setState({campusIdInputValue: event.target.value});
+}
+
+
 
 handleSubmit(event){
     console.log(this.props);
@@ -58,8 +68,9 @@ handleSubmit(event){
     console.log(this.state.nameInputValue)
     console.log(this.state.emailInputValue)
     console.log(this.state.imageInputValue);
+    console.log(this.state.campusIdInputValue);
 
-    this.props.updateStudent(this.state.nameInputValue, this.state.emailInputValue, this.state.imageInputValue, this.props.match.params.id);
+    this.props.updateStudent(this.state.nameInputValue, this.state.emailInputValue, this.state.imageInputValue, this.props.match.params.id, this.state.campusIdInputValue);
 
 }
 render(){
@@ -78,10 +89,12 @@ render(){
                 
                 <label > Student Image: (Optional) </label>
                  <input className="form-control" value = {this.state.imageInputValue} type = "text" onChange = {this.imageHandleChange} />
-                
+
+                  <label >Campus ID: </label>
+                 <input className="form-control" value = {this.state.campusIdInputValue} type = "text" onChange = {this.campusIdHandleChange} />
+
                      <button type = "submit" className = "btn btn-success">Submit</button>
                 
-
               </fieldset>
               </form>
 
@@ -95,11 +108,11 @@ const mapStateToProps = function(state){
         allStudents: state.students
     }
 }
-const mapDispatchToProps = function(dispatch){
+const mapDispatchToProps = function(dispatch, props){
     return {
-        updateStudent: (name, email, image,  id) => {
+        updateStudent: (name, email, image,  id, campusId) => {
             console.log("reached the updatedStudent thunk in my component");
-            var thunk = changeStudent({name: name, email: email, image: image, id: id});
+            var thunk = changeStudent({name: name, email: email, image: image, id: id, campusId: campusId}, props.history);
             dispatch(thunk);
         }
     }

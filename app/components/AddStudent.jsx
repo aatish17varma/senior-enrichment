@@ -37,7 +37,8 @@ handleSubmit(event){
     console.log(this.state.emailInputValue);
     console.log(this.state.imageInputValue);
     event.preventDefault();
-    this.props.createStudent(this.state.nameInputValue, this.state.emailInputValue, this.props.match.params.id, this.state.imageInputValue);
+    this.props.createStudent(this.state.nameInputValue, this.state.emailInputValue, this.props.match.params.id, this.state.imageInputValue)
+    .then(() => this.props.history.push('/'));
 
 }
 
