@@ -69,7 +69,6 @@ export default function reduce(campuses = [], action){
              }
             })
         default:
-            console.log("Hit the default statement")
             return campuses;
         
     }
@@ -88,7 +87,6 @@ export function getCampuses(){
 }
 
 export function createCampus(campusInfo, history){
-    console.log("reached the createCampus thunk")
     return function(dispatch){
         return axios.post("/api/campus", campusInfo)
         .then(res => res.data)
@@ -102,7 +100,6 @@ export function createCampus(campusInfo, history){
 }
 
 export function eraseCampus(campusId){
-    console.log('reached the eraseCampus thunk')
     return function(dispatch){
         return axios.delete(`/api/campus/${campusId}`)
         .then(res => res.data)
@@ -114,7 +111,6 @@ export function eraseCampus(campusId){
 }
 
 export function changeCampus(campus, history){
-        console.log('reached the updateCampus thunk')
         return function(dispatch){
             return axios.put(`/api/campus/${campus.id}`, campus)
             .then(res => res.data)

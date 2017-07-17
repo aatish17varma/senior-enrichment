@@ -32,7 +32,6 @@ findRightCampus(){
    var foundCampus = this.props.allCampuses.filter((campus) => {
         return +this.props.match.params.id === +campus.id;
    })
-   console.log(foundCampus);
     return foundCampus[0];
 }
 
@@ -45,16 +44,12 @@ imageHandleChange(event){
 }
 
 handleSubmit(event){
-    console.log(this.props);
     event.preventDefault();
-    console.log("IM IN HANDLE SUBMIT +++++++++++++++++");
-    console.log(this.state.nameInputValue)
-    console.log(this.state.imageInputValue);
+    
     this.props.updateCampus(this.state.nameInputValue, this.state.imageInputValue, this.props.match.params.id);
 
 }
 render(){
-    console.log("reached");
     return(
         <div>
               <form className="form-horizontal" onSubmit = {this.handleSubmit}>
@@ -86,7 +81,6 @@ const mapStateToProps = function(state){
 const mapDispatchToProps = function(dispatch, ownProps){
     return {
         updateCampus: (name, image, id) => {
-            console.log("reached the updateCampus thunk in my component");
             var thunk = changeCampus({name: name, image: image, id: id}, ownProps.history);
             dispatch(thunk);
         }

@@ -33,9 +33,6 @@ imageHandleChange(event){
 
 
 handleSubmit(event){
-    console.log(this.state.nameInputValue);
-    console.log(this.state.emailInputValue);
-    console.log(this.state.imageInputValue);
     event.preventDefault();
     this.props.createStudent(this.state.nameInputValue, this.state.emailInputValue, this.props.match.params.id, this.state.imageInputValue)
     .then(() => this.props.history.push('/'));
@@ -44,7 +41,6 @@ handleSubmit(event){
 
 
 render(){
-    console.log("reached");
     return(
         <div>
               <form className="form-horizontal" onSubmit = {this.handleSubmit}>
@@ -72,7 +68,6 @@ render(){
 const mapDispatchToProps = function(dispatch, ownProps){
     return {
         createStudent(name, email, campus, image){
-            console.log("reached");
             var madeStudent = makeStudent({name: name, email: email, campusId: campus, image: image}, ownProps.history);
             dispatch(madeStudent);
         }

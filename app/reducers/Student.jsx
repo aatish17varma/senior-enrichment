@@ -47,7 +47,6 @@ export default function reduce(students = [], action){
             return  [action.student, ...students]
             break;
         case DELETE_A_STUDENT:
-            console.log('reached DELETE case in reducer', action)
             return students.filter((eachStudent) => {if(eachStudent.id !== action.student.id){return true;}})
             break;
         case UPDATE_STUDENT:
@@ -60,7 +59,6 @@ export default function reduce(students = [], action){
                 }
             })
         default:
-            console.log("Hit the default statement")
             return students;
     }
 
@@ -77,7 +75,6 @@ export function getStudents(){
     }
 }
 export function makeStudent(studentInformation, history){
-    console.log("reached makeStudent thunk statement");
     return function thunk(dispatch){
         return axios.post("/api/student/", studentInformation)
         .then(res => res.data)
@@ -89,7 +86,6 @@ export function makeStudent(studentInformation, history){
 }
 
 export function eraseStudent(student){
-    console.log("reached a deleted student");
     return function thunk(dispatch){
         return axios.delete(`/api/student/${student.id}`)
         .then(res => res.data)
@@ -101,7 +97,6 @@ export function eraseStudent(student){
 }
 
 export function changeStudent(student){
- console.log('reached the updateStudent thunk')
         return function(dispatch){
             return axios.put(`/api/student/${student.id}`, student)
             .then(res => res.data)

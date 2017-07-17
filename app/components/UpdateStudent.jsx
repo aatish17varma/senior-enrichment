@@ -40,7 +40,6 @@ findRightStudent(){
    var foundStudent = this.props.allStudents.filter((student) => {
         return +this.props.match.params.id === +student.id;
    })
-   console.log(foundStudent);
     return foundStudent[0];
 }
 
@@ -62,19 +61,12 @@ campusIdHandleChange(event){
 
 
 handleSubmit(event){
-    console.log(this.props);
     event.preventDefault();
-    console.log("IM IN HANDLE SUBMIT +++++++++++++++++");
-    console.log(this.state.nameInputValue)
-    console.log(this.state.emailInputValue)
-    console.log(this.state.imageInputValue);
-    console.log(this.state.campusIdInputValue);
-
+   
     this.props.updateStudent(this.state.nameInputValue, this.state.emailInputValue, this.state.imageInputValue, this.props.match.params.id, this.state.campusIdInputValue);
 
 }
 render(){
-    console.log("reached");
     return(
         <div>
               <form className="form-horizontal" onSubmit = {this.handleSubmit}>
@@ -111,7 +103,6 @@ const mapStateToProps = function(state){
 const mapDispatchToProps = function(dispatch, props){
     return {
         updateStudent: (name, email, image,  id, campusId) => {
-            console.log("reached the updatedStudent thunk in my component");
             var thunk = changeStudent({name: name, email: email, image: image, id: id, campusId: campusId}, props.history);
             dispatch(thunk);
         }

@@ -28,14 +28,10 @@ imageHandleChange(event){
 
 handleSubmit(event){
     event.preventDefault();
-    console.log("IM IN HANDLE SUBMIT +++++++++++++++++");
-    console.log(this.state.nameInputValue)
-    console.log(this.state.imageInputValue);
     this.props.makeCampus(this.state.nameInputValue, this.state.imageInputValue);
 
 }
 render(){
-    console.log("reached");
     return(
         <div>
               <form className="form-horizontal" onSubmit = {this.handleSubmit}>
@@ -60,7 +56,6 @@ render(){
 const mapDispatchToProps = function(dispatch, props){
     return {
         makeCampus: (name, image) => {
-            console.log(props.history);
             var madeCampus = createCampus({name: name, image: image}, props.history);
             dispatch(madeCampus);
         }

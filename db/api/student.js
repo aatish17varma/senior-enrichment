@@ -28,7 +28,6 @@ router.post("/", (req, res, next) =>{
         image: req.body.image
     }})
     .then((student) => {
-        console.log("reached the .then part")
         if(student.name !== null){
             res.json( student );
         }
@@ -41,7 +40,6 @@ router.post("/", (req, res, next) =>{
 
 
 router.put("/:id", (req, res, next) => {
-   console.log("reached put route");
     Student.findById( req.params.id )
     .then((student) => {
         var updatedStudent = student.update(req.body);

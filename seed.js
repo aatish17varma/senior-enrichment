@@ -9,12 +9,12 @@ var students = [
   {name: 'Sid Reddy', email: "sid.reddy@fullstackacademy.com", image: "https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/male/55.png",  campusId:1},
   {name: 'Yu Lin',email: "yu.lin@fullstackacademy.com", image: "https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/2.png",  campusId:1},
   {name: 'Stanley Tie',email: "stanley.tie@fullstackacademy.com", image: "https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/male/41.png", campusId:1},
-  {name: 'Nancy Velasquez', email: "nancy.Velasquez@fullstackacademy.com", image: "https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/male/36.png", campusId:2},
-  {name: 'Truman Purnell',email: "Truman.Purnell@fullstackacademy.com",image: "https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/99.png", campusId:2},
-  {name: 'Mikhail Quader', email: "Mikhail.Quader@fullstackacademy.com", image: "https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/male/17.png", campusId:3},
-  {name: 'Matthew Snow', email: "Matthew.Snow@fullstackacademy.com",image: "https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/male/106.png", campusId:3},
-  {name: 'One June Kang',email: "One.June@fullstackacademy.com",image: "https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/88.png", campusId:4},
-  {name: 'Edward Yao',email: "Edward.Yao@fullstackacademy.com", image: "https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/37.png", campusId:4},
+  {name: 'Nancy Velasquez', email: "nancy.Velasquez@gracehopper.com", image: "https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/male/36.png", campusId:2},
+  {name: 'Truman Purnell',email: "Truman.Purnell@gracehopper.com",image: "https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/99.png", campusId:2},
+  {name: 'Mikhail Quader', email: "Mikhail.Quader@flatironschool.com", image: "https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/male/17.png", campusId:3},
+  {name: 'Matthew Snow', email: "Matthew.Snow@flatironschool.com",image: "https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/male/106.png", campusId:3},
+  {name: 'One June Kang',email: "One.June@appacademy.com",image: "https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/88.png", campusId:4},
+  {name: 'Edward Yao',email: "Edward.Yao@appacademy.com", image: "https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/37.png", campusId:4},
   ];
 
 var campuses = [

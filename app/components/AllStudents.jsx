@@ -5,11 +5,7 @@ import {getCampuses} from "../reducers/Campus"
 import {Link} from "react-router-dom";
 
 function AllStudents(props){
-
-    console.log(props.listOfCampuses);
-    console.log(props.listOfStudents);
-    
-
+   
     return(
         <div>
         
@@ -33,18 +29,13 @@ function AllStudents(props){
                                 <div className = "col">
                             <h4 className="media-heading">{element.name}</h4>
                                 <p>{element.email}</p>
-        
-                                <p>Campus Name:{ console.log(props.listOfCampuses.filter((campus) => {
-                                       return +campus.id === +element.campusId;
-                                   }))}{   
-                                    
-                                    props.listOfCampuses.filter((campus) => {
-                                       return +campus.id === +element.campusId;
-                                   })[0]["name"] 
+
+                                <p>Campus Name: {
+                                    props.listOfCampuses.filter(  (campus) => {return +element.campusId === +campus.id}).length === 0 ? null : props.listOfCampuses.find(  (campus) => {return +element.campusId === +campus.id}).name
                                     
                                     }</p>
-            
-                                </div>
+                                
+                            </div>
 
                                 <div className = "col">
                              <button type="button" onClick = {() => props.deleteStudent(element)}  className="btn btn-danger">Delete</button>

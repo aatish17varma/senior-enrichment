@@ -13,8 +13,6 @@ export function singleCampus(props){
     var filteredStudents = allStudents.filter(element => { return element.campusId === Number(props.match.params.id)})
     console.log(filteredStudents);
 
-    // const currentCampus = props.allCampuses.filter((campus) => { return +campus.id  === +props.match.params.id })[0]; 
-
     return(
        
      <div className = "row">

@@ -13,8 +13,8 @@ router.get('/', (req, res, next) => {
     .catch(next);
 })
 
-router.get('/:id/students', (req, res, next)=>{
-   Campus.findAll({where: {id: req.params.id}}
+router.get('/:id', (req, res, next)=>{
+   Campus.findAll({where: {id: req.params.id}, include: [Student]}
    .then(foundCampus => {
         res.send(foundCampus)
    })
@@ -28,7 +28,6 @@ router.post("/", (req, res, next) =>{
         image: req.body.image
     }})
     .then((campus) => {
-        console.log("reached the .then part")
         if(campus.name !== null){
             res.json( campus );
         }
@@ -40,7 +39,6 @@ router.post("/", (req, res, next) =>{
 })
 
 router.put("/:id", (req, res, next) => {
-    console.log("reached put route");
     Campus.findById( req.params.id )
     .then((campus) => {
         var updatedCampus = campus.update(req.body);
@@ -61,6 +59,5 @@ router.delete("/:id", (req, res, next) => {
   })    
 .catch(next);
 })
-
 
 module.exports = router;
